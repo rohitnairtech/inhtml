@@ -1,0 +1,23 @@
+{
+  "name": "inhtml",
+  "version": "1.1.0",
+  "description": "Lightweight html generator to create sever-side-rendering pages with ease ",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rohitnairtech/inhtml.git"
+  },
+  "keywords": [
+    "html-generator",
+    "template-engine"
+  ],
+  "author": "Rohit Nair",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rohitnairtech/inhtml/issues"
+  },
+  "homepage": "https://github.com/rohitnairtech/inhtml#readme"
+}

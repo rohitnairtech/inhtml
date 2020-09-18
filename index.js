@@ -1,7 +1,7 @@
 "use strict";
 const {readFileSync} = require('fs');
 
-const inHtml = (filename) => {
+module.exports = (filename) => {
 
     const file = readFileSync(filename, 'utf-8').replace(/\s\s+/g, ' ');
     
@@ -15,5 +15,3 @@ const inHtml = (filename) => {
             }
         };
 }
-
-module.exports = inHtml;

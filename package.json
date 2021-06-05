@@ -1,6 +1,6 @@
 {
   "name": "inhtml",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Lightweight html generator to create sever-side-rendering pages with ease ",
   "main": "index.js",
   "scripts": {

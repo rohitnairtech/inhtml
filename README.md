@@ -26,12 +26,12 @@ npm install inhtml
 ```javascript
 const inHTML = require('inhtml');
 
-const welcomePage = inhtml('./welcome.html');
+const welcomePage = inHTML('./welcome.html');
 
 
 const finalHTML = welcomePage.render({link:'https://github.com/rohitnairtech', name:'Rohit Nair'});
 
-console.log(finalHTML); // returns 'Hi, Rohit Nair' along with the link
+console.log(finalHTML); // returns '<h1>Hi, <a href="https://github.com/rohitnairtech">Rohit Nair</a></h1>'
 ```
 
 

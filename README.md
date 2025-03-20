@@ -5,8 +5,14 @@
 ![npm](https://img.shields.io/npm/dt/inhtml?style=for-the-badge)
 ![NPM](https://img.shields.io/npm/l/inhtml?style=for-the-badge)
 
+inHTML is a lightweight HTML templating engine written in NodeJS. It allows you to pre-render HTML templates with ease using simple placeholders and partials.
 
-inHTML is a light-weight HTML templating engine written in NodeJS. It is used to pre-render saved HTML files.
+## Features
+
+- Lightweight and fast HTML rendering
+- Supports placeholders using `#{variableName}`
+- Supports partial templates using `#{>partialName}`
+- Optional HTML escaping to prevent XSS
 
 ## Installation
 
@@ -18,27 +24,82 @@ npm install inhtml
 
 ## Usage
 
-```HTML
-<!-- CONSIDERING THAT 'welcome.html' PAGE LOOKS LIKE THIS -->
+### Basic Example
+
+```html
+<!-- welcome.html -->
 <h1>Hi, <a href="#{link}">#{name}</a></h1>
 ```
 
 ```javascript
 const inHTML = require('inhtml');
-
 const welcomePage = inHTML('./welcome.html');
 
+const finalHTML = welcomePage.render({
+  link: 'https://github.com/rohitnairtech',
+  name: 'Rohit Nair'
+});
 
-const finalHTML = welcomePage.render({link:'https://github.com/rohitnairtech', name:'Rohit Nair'});
-
-console.log(finalHTML); // returns '<h1>Hi, <a href="https://github.com/rohitnairtech">Rohit Nair</a></h1>'
+console.log(finalHTML);
+// Output: '<h1>Hi, <a href="https://github.com/rohitnairtech">Rohit Nair</a></h1>'
 ```
 
+---
+
+### Using Partials
+
+You can reuse HTML templates using partials with `#{>partialName}`.
+
+```html
+<!-- header.html -->
+<h1>Welcome, #{name}!</h1>
+```
+
+```html
+<!-- layout.html -->
+<div>
+  #{>header}
+  <p>Your profile is ready.</p>
+</div>
+```
+
+```javascript
+const inHTML = require('inhtml');
+const layoutPage = inHTML('./layout.html', {
+  partials: {
+    header: '<h1>Welcome, #{name}!</h1>'
+  }
+});
+
+const finalHTML = layoutPage.render({ name: 'Rohit' });
+console.log(finalHTML);
+// Output: '<div><h1>Welcome, Rohit!</h1><p>Your profile is ready.</p></div>'
+```
+
+---
+
+### HTML Escaping
+
+To prevent XSS attacks, you can enable HTML escaping.
+
+```javascript
+const inHTML = require('inhtml');
+const page = inHTML('./welcome.html', { escapeHtml: true });
+
+const finalHTML = page.render({
+  name: '<script>alert("XSS")</script>',
+  link: 'https://example.com'
+});
+
+console.log(finalHTML);
+// Output: '<h1>Hi, <a href="https://example.com">&lt;script&gt;alert("XSS")&lt;/script&gt;</a></h1>'
+```
 
 ## Contributing
+
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-Please make sure to update tests as appropriate.
-
 ## License
+
 [ISC](https://www.isc.org/)
+
